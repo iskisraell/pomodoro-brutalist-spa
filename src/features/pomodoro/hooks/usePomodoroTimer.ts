@@ -42,11 +42,14 @@ export const usePomodoroTimer = ({
       return;
     }
 
-    const tick = () => dispatch({ type: "tick", now: performance.now() });
-    const timerId = window.setInterval(tick, 200);
+    let frameId: number;
+    const tick = () => {
+      dispatch({ type: "tick", now: performance.now() });
+      frameId = requestAnimationFrame(tick);
+    };
     tick();
 
-    return () => window.clearInterval(timerId);
+    return () => cancelAnimationFrame(frameId);
   }, [state.status]);
 
   useEffect(() => {
