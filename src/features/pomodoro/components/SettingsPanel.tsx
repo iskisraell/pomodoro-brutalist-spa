@@ -10,6 +10,7 @@ import type { PomodoroSettings } from "@/features/pomodoro/model/types";
 interface SettingsPanelProps {
   settings: PomodoroSettings;
   onSettingsChange: (next: Partial<PomodoroSettings>) => void;
+  compact?: boolean;
 }
 
 interface RangeControlProps {
@@ -48,16 +49,19 @@ const RangeControl = ({
 export const SettingsPanel = ({
   settings,
   onSettingsChange,
+  compact = false,
 }: SettingsPanelProps) => (
   <Card className="rounded-[1.5rem] border-[3px] border-border bg-card paper-shadow">
-    <CardHeader className="pb-2">
-      <CardTitle className="flex items-center gap-2 font-display text-2xl uppercase">
-        <SlidersHorizontal className="size-5" />
-        Ritual setup
-      </CardTitle>
-    </CardHeader>
+    {compact ? null : (
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center gap-2 font-display text-2xl uppercase">
+          <SlidersHorizontal className="size-5" />
+          Ritual setup
+        </CardTitle>
+      </CardHeader>
+    )}
 
-    <CardContent className="space-y-4">
+    <CardContent className={compact ? "space-y-4 pt-6" : "space-y-4"}>
       <RangeControl
         label="Focus"
         value={settings.focusMinutes}

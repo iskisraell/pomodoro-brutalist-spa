@@ -8,33 +8,54 @@ import type { SessionRecord } from "@/features/pomodoro/model/types";
 interface HistoryPanelProps {
   sessions: SessionRecord[];
   onClear: () => void;
+  compact?: boolean;
 }
 
 const formatDuration = (plannedMs: number) =>
   `${Math.round(plannedMs / MINUTE_IN_MS)} min`;
 
-export const HistoryPanel = ({ sessions, onClear }: HistoryPanelProps) => (
+export const HistoryPanel = ({
+  sessions,
+  onClear,
+  compact = false,
+}: HistoryPanelProps) => (
   <Card className="rounded-[0.8rem] border-[3px] border-border bg-card soft-bump">
-    <CardHeader className="pb-2">
-      <div className="flex items-center justify-between gap-2">
-        <CardTitle className="flex items-center gap-2 font-display text-2xl uppercase">
-          <Clock3 className="size-5" />
-          Session trail
-        </CardTitle>
+    {compact ? null : (
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between gap-2">
+          <CardTitle className="flex items-center gap-2 font-display text-2xl uppercase">
+            <Clock3 className="size-5" />
+            Session trail
+          </CardTitle>
 
-        <Button
-          variant="outline"
-          className="h-9 rounded-[0.6rem] border-[3px] border-border px-3"
-          onClick={onClear}
-          disabled={sessions.length === 0}
-        >
-          <Eraser className="size-4" />
-          Clear
-        </Button>
-      </div>
-    </CardHeader>
+          <Button
+            variant="outline"
+            className="h-9 rounded-[0.6rem] border-[3px] border-border px-3"
+            onClick={onClear}
+            disabled={sessions.length === 0}
+          >
+            <Eraser className="size-4" />
+            Clear
+          </Button>
+        </div>
+      </CardHeader>
+    )}
 
-    <CardContent>
+    <CardContent className={compact ? "space-y-3 pt-6" : ""}>
+      {compact ? (
+        <div className="flex justify-end">
+          <Button
+            variant="outline"
+            className="h-9 rounded-[0.6rem] border-[3px] border-border px-3"
+            onClick={onClear}
+            disabled={sessions.length === 0}
+          >
+            <Eraser className="size-4" />
+            Clear
+          </Button>
+        </div>
+      ) : null}
+
       {sessions.length === 0 ? (
         <p className="rounded-[1.2rem] border-[3px] border-dashed border-border bg-muted px-4 py-5 text-sm">
           No sessions yet. Start your first focus run.
