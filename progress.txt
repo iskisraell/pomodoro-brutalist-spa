@@ -1,0 +1,8 @@
+2026-02-18 - Initialized Vite + React + TypeScript app with Bun and git.
+2026-02-18 - Installed Tailwind v4, shadcn/ui, Framer Motion, Sonner, Convex, and Clerk dependencies.
+2026-02-18 - Configured Vite aliases, Tailwind plugin, and test tooling with Vitest.
+2026-02-18 - Implemented Pomodoro SPA architecture with reducer-driven drift-safe timer engine.
+2026-02-18 - Added colorful brutalist design tokens and responsive single-page layout.
+2026-02-18 - Added local persistence via repository abstraction for settings and session history.
+2026-02-18 - Scaffolded Convex + Clerk future integration baseline with feature flags and placeholder envs.
+2026-02-18 - Added Vercel SPA rewrite configuration and baseline tests for timer/storage logic.
